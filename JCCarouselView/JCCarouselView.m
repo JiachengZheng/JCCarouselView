@@ -13,11 +13,11 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *curImageView;
 @property (nonatomic, strong) UIImageView *otherImageView;
-@property (nonatomic, assign) NSInteger curIndex;
-@property (nonatomic, assign) NSInteger nextIndex;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) UIImage *placeholderImage;
+@property (nonatomic, assign) NSInteger curIndex;
+@property (nonatomic, assign) NSInteger nextIndex;
 
 @end
 

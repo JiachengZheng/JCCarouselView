@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface JCCarouselView : UIView
+
 @property (nonatomic, strong) NSArray *imageUrlArr;
+
+
 @end
