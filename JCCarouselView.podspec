@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author       = { "zhengjiacheng" => "jiachengzheng@163.com" }
-  s.platform     = :ios, "6.0"
-  s.ios.deployment_target = "6.0"
+  s.platform     = :ios, "7.0"
+  s.ios.deployment_target = "7.0"
   s.source       = { :git => 'https://github.com/JiachengZheng/JCCarouselView.git', :tag => s.version }
   s.source_files  = 'JCCarouselView/*.{h,m}'
 
@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "SDWebImage"
+  s.dependency 'SDWebImage'
 
 end

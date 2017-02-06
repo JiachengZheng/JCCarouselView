@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UIImageView+WebCache.h"
 typedef void(^JCCarouselViewClickBlock)(NSInteger index);
 
 @class JCCarouselView;

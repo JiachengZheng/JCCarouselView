@@ -7,7 +7,6 @@
 //
 
 #import "JCCarouselView.h"
-#import "UIImageView+WebCache.h"
 
 static NSTimeInterval const JCDefaultTimeInterval = 3;//默认滚动间隔
 static NSString *const JCDefaultPlaceholderImageName = @"placeholder";
