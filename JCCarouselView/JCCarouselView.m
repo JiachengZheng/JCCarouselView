@@ -20,7 +20,7 @@ static NSString *const JCDefaultPlaceholderImageName = @"placeholder";
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, assign) NSInteger curIndex;
 @property (nonatomic, assign) NSInteger nextIndex;
-
+@property (nonatomic, strong) NSURL* nextImageUrl;
 @end
 
 @implementation JCCarouselView
@@ -213,9 +213,10 @@ static NSString *const JCDefaultPlaceholderImageName = @"placeholder";
         return;
     }
     NSURL *nextImageUrl = self.imageUrlArr[self.nextIndex];
-    if ([[self.otherImageView sd_imageURL].absoluteString isEqualToString:nextImageUrl.absoluteString]) {
+    if (self.nextImageUrl && [self.nextImageUrl.absoluteString isEqualToString:nextImageUrl.absoluteString]) {
         return;//防止重复设置图片
     }
+    self.nextImageUrl = nextImageUrl;
     [self.otherImageView sd_setImageWithURL:nextImageUrl placeholderImage:self.placeholderImage];
 }
 
