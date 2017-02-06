@@ -1,21 +1,25 @@
+
 Pod::Spec.new do |s|
 
   s.name         = "JCCarouselView"
   s.version      = "1.0.0"
-  s.summary      = "轮播banner 组件"
+  s.summary      = "两个UIImageView实现的轮播banner"
 
   s.homepage     = "https://github.com/JiachengZheng/JCCarouselView"
-  s.license      = "MIT"
 
-  s.author       = { "ZhengJiacheng" => "jiachengzheng@163.com" }
-  s.social_media_url ="http://www.jianshu.com/u/3d8439db292b"
-  s.platform     = :ios, "7.0"
+  s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.author             = { "zhengjiacheng" => "jiachengzheng@163.com" }
+  s.platform     = :ios, "6.0"
+  s.ios.deployment_target = "6.0"
+  s.source       = { :git => 'https://github.com/JiachengZheng/JCCarouselView.git', :tag => s.version }
+  s.source_files  = 'JCCarouselView/*.{h,m}'
 
-  s.source       = { :git => "https://github.com/JiachengZheng/JCCarouselView", :tag => s.version }
+  # s.resource  = "icon.png"
+  # s.resources = "Resources/*.png"
 
-
-  s.source_files  = "JCCarouselView/*.{h,m}"
   s.requires_arc = true
 
-  s.dependency 'SDWebImage'
+  # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
+  s.dependency "SDWebImage"
+
 end
