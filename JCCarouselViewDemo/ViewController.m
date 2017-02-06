@@ -8,11 +8,9 @@
 
 #import "ViewController.h"
 #import "JCCarouselView.h"
-#import "UIImageView+WebCache.h"
 
+#import "JCSingleCarouselView.h"
 @interface ViewController ()
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, strong) NSArray *imageUrlArr;
 @end
 
@@ -42,55 +40,11 @@
 }
 
 - (void)demo2{
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 280, self.view.frame.size.width, 220)];
-    [self.view addSubview:self.imageView];
-    [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    self.imageView.clipsToBounds = YES;
-    
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlArr.firstObject]];
-    self.imageView.userInteractionEnabled = YES;
-    UISwipeGestureRecognizer *leftSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(leftSwipe:)];
-    leftSwipeGesture.direction=UISwipeGestureRecognizerDirectionLeft;
-    [self.imageView addGestureRecognizer:leftSwipeGesture];
-    
-    UISwipeGestureRecognizer *rightSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(rightSwipe:)];
-    rightSwipeGesture.direction=UISwipeGestureRecognizerDirectionRight;
-    [self.imageView addGestureRecognizer:rightSwipeGesture];
+    JCSingleCarouselView *bannerView = [[JCSingleCarouselView alloc]initWithFrame:CGRectMake(0, 280, self.view.frame.size.width, 220)];
+    [self.view addSubview:bannerView];
+    bannerView.imageUrlArr = self.imageUrlArr;
 }
 
--(void)leftSwipe:(UISwipeGestureRecognizer *)gesture{
-    [self transitionAnimation:1];
-}
-
--(void)rightSwipe:(UISwipeGestureRecognizer *)gesture{
-    [self transitionAnimation:2];
-}
-
--(void)transitionAnimation:(NSInteger)direction{
-    CATransition *transition=[[CATransition alloc]init];
-    transition.type= @"rippleEffect";//kCATransitionPush;//@"rippleEffect";
-    
-    BOOL right = YES;
-    
-    //设置子类型
-    if (direction == 1) {
-        transition.subtype=kCATransitionFromRight;
-        right = YES;
-    }else if (direction == 2) {
-        transition.subtype=kCATransitionFromLeft;
-        right = NO;
-    }
-
-    transition.duration = 1.f;
-
-    if (right) {
-        _currentIndex=(_currentIndex+1)%self.imageUrlArr.count;
-    }else{
-        _currentIndex=(_currentIndex-1+self.imageUrlArr.count)%4;
-    }
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlArr[_currentIndex]]];
-    [_imageView.layer addAnimation:transition forKey:@"KCTransitionAnimation1"];
-}
 
 
 @end
