@@ -137,6 +137,9 @@ typedef NS_ENUM(NSUInteger, JCCarouselDirection) {
 }
 
 - (void)autoScrollToNextImage{
+    if (!self.imageUrlArr || self.imageUrlArr.count < 1) {
+        return;
+    }
     [self transitionAnimation:JCCarouselDirectionLeft];
 }
 

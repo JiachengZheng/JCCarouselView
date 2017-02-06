@@ -18,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"Demo";
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.imageUrlArr = @[
                          @"http://cdn.sspai.com/attachment/thumbnail/2017/01/22/1aaa97293057371535fb408a18fa937c590f1_mw_800_wm_1_wmp_3.jpg",
                          @"http://cdn.sspai.com/attachment/origin/2016/12/26/360721.jpg",
@@ -34,13 +35,25 @@
 }
 
 - (void)demo1{
-    JCCarouselView *bannerView = [[JCCarouselView alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 220)];
+    JCCarouselView *bannerView = [[JCCarouselView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 220)];
     [self.view addSubview:bannerView];
     bannerView.imageUrlArr = self.imageUrlArr;
+    
+    bannerView.placeholderImage = [UIImage imageNamed:@"placeholder"];
+    
+    //设置pagecontrol 图片
+    bannerView.curPageControlImage = [UIImage imageNamed:@"Group"];
+    bannerView.pageControlImage = [UIImage imageNamed:@"Group1"];
+    
+    //设置pagecontrol 颜色
+    bannerView.pageControlColor = [UIColor whiteColor];
+    bannerView.curPageControlColor = [UIColor redColor];
+    
+    bannerView.timeInterval = 3;
 }
 
 - (void)demo2{
-    JCSingleCarouselView *bannerView = [[JCSingleCarouselView alloc]initWithFrame:CGRectMake(0, 280, self.view.frame.size.width, 220)];
+    JCSingleCarouselView *bannerView = [[JCSingleCarouselView alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 220)];
     [self.view addSubview:bannerView];
     bannerView.imageUrlArr = self.imageUrlArr;
 }

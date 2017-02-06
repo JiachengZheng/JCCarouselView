@@ -8,6 +8,9 @@
 
 #import "JCCarouselView.h"
 #import "UIImageView+WebCache.h"
+
+static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
+
 @interface JCCarouselView () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -15,7 +18,6 @@
 @property (nonatomic, strong) UIImageView *otherImageView;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) UIPageControl *pageControl;
-@property (nonatomic, strong) UIImage *placeholderImage;
 @property (nonatomic, assign) NSInteger curIndex;
 @property (nonatomic, assign) NSInteger nextIndex;
 
@@ -60,6 +62,23 @@
     [self.scrollView addSubview:self.otherImageView];
     [self addSubview:self.pageControl];
     self.placeholderImage = [UIImage imageNamed:@"placeholder@2x"];
+    self.timeInterval = JCDefaultTimeInterval;
+}
+
+- (void)setCurPageControlImage:(UIImage *)curPageControlImage{
+    [self.pageControl setValue:curPageControlImage forKey:@"currentPageImage"];
+}
+
+- (void)setPageControlImage:(UIImage *)pageControlImage{
+    [self.pageControl setValue:pageControlImage forKey:@"pageImage"];
+}
+
+- (void)setCurPageControlColor:(UIColor *)curPageControlColor{
+    self.pageControl.currentPageIndicatorTintColor = curPageControlColor;
+}
+
+- (void)setPageControlColor:(UIColor *)pageControlColor{
+    self.pageControl.pageIndicatorTintColor = pageControlColor;
 }
 
 - (UIPageControl *)pageControl{
@@ -84,6 +103,7 @@
             scrollView.delegate = self;
             scrollView.clipsToBounds = YES;
             scrollView.bounces = NO;
+            scrollView.contentInset = UIEdgeInsetsZero;
             [scrollView setContentOffset:CGPointMake(self.width, 0)];
             scrollView;
         });
@@ -115,9 +135,15 @@
     return  _otherImageView;
 }
 
+- (void)setTimeInterval:(NSTimeInterval)timeInterval{
+    [self stopTimer];
+    _timeInterval = timeInterval;
+    [self startTimer];
+}
+
 - (void)startTimer{
     [self stopTimer];
-    _timer = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(autoScrollToNextImage) userInfo:nil repeats:YES];
+    _timer = [NSTimer timerWithTimeInterval:self.timeInterval target:self selector:@selector(autoScrollToNextImage) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 
