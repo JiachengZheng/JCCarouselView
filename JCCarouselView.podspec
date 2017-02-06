@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/JiachengZheng/JCCarouselView"
 
   s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.author             = { "zhengjiacheng" => "jiachengzheng@163.com" }
+  s.author       = { "zhengjiacheng" => "jiachengzheng@163.com" }
   s.platform     = :ios, "6.0"
   s.ios.deployment_target = "6.0"
   s.source       = { :git => 'https://github.com/JiachengZheng/JCCarouselView.git', :tag => s.version }
