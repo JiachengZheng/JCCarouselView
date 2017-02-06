@@ -213,9 +213,9 @@ static NSString *const JCDefaultPlaceholderImageName = @"placeholder";
         return;
     }
     NSURL *nextImageUrl = self.imageUrlArr[self.nextIndex];
-    //if ([self.otherImageView.sd_imageURL.absoluteString isEqualToString:nextImageUrl.absoluteString]) {
-      //  return;//防止重复设置图片
-    //}
+    if ([self.otherImageView.sd_imageURL.absoluteString isEqualToString:nextImageUrl.absoluteString]) {
+        return;//防止重复设置图片
+    }
     [self.otherImageView sd_setImageWithURL:nextImageUrl placeholderImage:self.placeholderImage];
 }
 
