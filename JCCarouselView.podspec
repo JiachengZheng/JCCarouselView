@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "JCCarouselView"
-  s.version      = "1.0.3"
+  s.version      = "1.0.4"
   s.summary      = "两个UIImageView实现的轮播banner"
 
   s.homepage     = "https://github.com/JiachengZheng/JCCarouselView"
