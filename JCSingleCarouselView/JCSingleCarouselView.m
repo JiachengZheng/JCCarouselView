@@ -56,12 +56,12 @@ typedef NS_ENUM(NSUInteger, JCCarouselDirection) {
         _imageView.clipsToBounds = YES;
         
         _imageView.userInteractionEnabled = YES;
-        UISwipeGestureRecognizer *leftSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(leftSwipe:)];
-        leftSwipeGesture.direction=UISwipeGestureRecognizerDirectionLeft;
+        UISwipeGestureRecognizer *leftSwipeGesture = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(leftSwipe:)];
+        leftSwipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
         [_imageView addGestureRecognizer:leftSwipeGesture];
         
-        UISwipeGestureRecognizer *rightSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(rightSwipe:)];
-        rightSwipeGesture.direction=UISwipeGestureRecognizerDirectionRight;
+        UISwipeGestureRecognizer *rightSwipeGesture = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(rightSwipe:)];
+        rightSwipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
         [_imageView addGestureRecognizer:rightSwipeGesture];
     }
     return _imageView;
