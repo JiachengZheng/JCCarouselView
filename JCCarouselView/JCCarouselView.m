@@ -9,7 +9,8 @@
 #import "JCCarouselView.h"
 #import "UIImageView+WebCache.h"
 
-static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
+static NSTimeInterval const JCDefaultTimeInterval = 3;//默认滚动间隔
+static NSString *const JCDefaultPlaceholderImageName = @"placeholder";
 
 @interface JCCarouselView () <UIScrollViewDelegate>
 
@@ -29,7 +30,7 @@ static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
 {
     self = [super initWithCoder:coder];
     if (self) {
-        [self setupSubviews];
+        [self initSubviews];
     }
     return self;
 }
@@ -38,14 +39,14 @@ static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupSubviews];
+        [self initSubviews];
     }
     return self;
 }
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    [self setupSubviews];
+    [self initSubviews];
 }
 
 - (CGFloat)height {
@@ -56,12 +57,12 @@ static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
     return self.frame.size.width;
 }
 
-- (void)setupSubviews{
+- (void)initSubviews{
     [self addSubview:self.scrollView];
     [self.scrollView addSubview:self.curImageView];
     [self.scrollView addSubview:self.otherImageView];
     [self addSubview:self.pageControl];
-    self.placeholderImage = [UIImage imageNamed:@"placeholder@2x"];
+    self.placeholderImage = [UIImage imageNamed:JCDefaultPlaceholderImageName];
     self.timeInterval = JCDefaultTimeInterval;
 }
 
@@ -152,6 +153,7 @@ static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
     self.timer = nil;
 }
 
+#pragma mark - 自动右滑
 - (void)autoScrollToNextImage{
     if (!self.imageUrlArr || self.imageUrlArr.count < 1) {
         return;
@@ -180,7 +182,7 @@ static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
     }
     self.pageControl.currentPage = 0;
     self.pageControl.numberOfPages = _imageUrlArr.count;
-    [self configImageView];
+    [self configCurrentImageView];
     [self startTimer];
 }
 
@@ -189,7 +191,7 @@ static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
     self.pageControl.center = CGPointMake(self.width/2, self.height - 10);
 }
 
-- (void)configImageView{
+- (void)configCurrentImageView{
     if (_imageUrlArr.count < 1) {
         return;
     }
@@ -230,6 +232,7 @@ static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
     [self setupNextPageImageView];
 }
 
+#pragma mark 回到中间位置图片
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self scrollToMiddlePage];
 }
@@ -238,10 +241,12 @@ static NSTimeInterval JCDefaultTimeInterval = 3;//默认滚动间隔
     [self scrollToMiddlePage];
 }
 
+#pragma mark 开始拖拽时停止计时器
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self stopTimer];
 }
 
+#pragma mark 停止拖拽时开启计时器
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     [self startTimer];
 }

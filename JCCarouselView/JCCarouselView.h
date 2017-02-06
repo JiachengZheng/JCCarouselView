@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @interface JCCarouselView : UIView
 
 /**
@@ -47,6 +45,16 @@
  *  默认pageControl颜色
  */
 @property (nonatomic, strong) UIColor *pageControlColor;
+
+/**
+ *  开启定时器 默认开启
+ */
+- (void)startTimer;
+
+/**
+ *  停止计时器
+ */
+- (void)stopTimer;
 
 
 @end
