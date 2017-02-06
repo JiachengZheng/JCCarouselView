@@ -105,6 +105,8 @@ static NSString *const JCDefaultPlaceholderImageName = @"placeholder";
             scrollView.clipsToBounds = YES;
             scrollView.bounces = NO;
             scrollView.contentInset = UIEdgeInsetsZero;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickImageView)];
+            [scrollView addGestureRecognizer:tap];
             [scrollView setContentOffset:CGPointMake(self.width, 0)];
             scrollView;
         });
@@ -151,6 +153,14 @@ static NSString *const JCDefaultPlaceholderImageName = @"placeholder";
 - (void)stopTimer{
     [self.timer invalidate];
     self.timer = nil;
+}
+
+- (void)clickImageView{
+    if (self.clickBlock) {
+        self.clickBlock(self.curIndex);
+    } else if ([self.delegate respondsToSelector:@selector(carouselView:didSelectedAtIndex:)]){
+        [self.delegate carouselView:self didSelectedAtIndex:self.curIndex];
+    }
 }
 
 #pragma mark - 自动右滑
@@ -204,6 +214,9 @@ static NSString *const JCDefaultPlaceholderImageName = @"placeholder";
         return;
     }
     NSURL *nextImageUrl = self.imageUrlArr[self.nextIndex];
+    if ([self.otherImageView.sd_imageURL.absoluteString isEqualToString:nextImageUrl.absoluteString]) {
+        return;//防止重复设置图片
+    }
     [self.otherImageView sd_setImageWithURL:nextImageUrl placeholderImage:self.placeholderImage];
 }
 

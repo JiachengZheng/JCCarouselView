@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^JCCarouselViewClickBlock)(NSInteger index);
+
+@class JCCarouselView;
+
+@protocol JCCarouselViewDelegate <NSObject>
+
+@optional
+- (void)carouselView:(JCCarouselView *)carouselView didSelectedAtIndex:(NSInteger)index;
+
+@end
+
 @interface JCCarouselView : UIView
 
 /**
@@ -16,9 +27,19 @@
 @property (nonatomic, strong) NSArray *imageUrlArr;
 
 /**
- *  滚动间隔
+ *  滚动间隔时长
  */
 @property (nonatomic, assign) NSTimeInterval timeInterval;
+
+/**
+ *  点击回调Block
+ */
+@property (nonatomic, copy) JCCarouselViewClickBlock clickBlock;
+
+/**
+ *  点击代理，如果有block 优先响应block
+ */
+@property (nonatomic, weak) id<JCCarouselViewDelegate> delegate;
 
 /**
  *  占位图片
