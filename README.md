@@ -37,4 +37,4 @@ Email:jiacheng_zheng@163.com
 
 如果你发现bug，please pull reqeust me 
 
-如果你有更好的改进，please pull reqeust m
+如果你有更好的改进，please pull reqeust me
