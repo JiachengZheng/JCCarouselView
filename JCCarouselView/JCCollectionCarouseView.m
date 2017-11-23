@@ -115,7 +115,7 @@
 
 - (void)startTimer{
     [self stopTimer];
-    _timer = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(autoScrollToNextImage) userInfo:nil repeats:YES];
+    _timer = [NSTimer timerWithTimeInterval:4 target:self selector:@selector(autoScrollToNextImage) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 

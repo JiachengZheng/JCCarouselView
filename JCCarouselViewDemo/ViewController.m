@@ -32,13 +32,14 @@
     [self demo1];
     
     //用一张UIImageView实现的，利用动画转场
-//    [self demo2];
+    [self demo2];
     
+    //带视觉差banner
     [self demo3];
 }
 
 - (void)demo1{
-    JCCarouselView *bannerView = [[JCCarouselView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 220)];
+    JCCarouselView *bannerView = [[JCCarouselView alloc]initWithFrame:CGRectMake(0, 74, self.view.frame.size.width, 150)];
     [self.view addSubview:bannerView];
     bannerView.imageUrlArr = self.imageUrlArr;
     
@@ -65,13 +66,13 @@
 }
 
 - (void)demo2{
-    JCSingleCarouselView *bannerView = [[JCSingleCarouselView alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 220)];
+    JCSingleCarouselView *bannerView = [[JCSingleCarouselView alloc]initWithFrame:CGRectMake(0, 240, self.view.frame.size.width, 150)];
     [self.view addSubview:bannerView];
     bannerView.imageUrlArr = self.imageUrlArr;
 }
 
 - (void)demo3{
-    JCCollectionCarouseView *banner = [[JCCollectionCarouseView alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 220)];
+    JCCollectionCarouseView *banner = [[JCCollectionCarouseView alloc]initWithFrame:CGRectMake(0, 406, self.view.frame.size.width, 150)];
     banner.dataSource = self;
     banner.delegate = self;
     [banner reloadData];
@@ -86,16 +87,12 @@
     return [NSURL URLWithString:self.imageUrlArr[index]];
 }
 
-//- (UIView *)carouseView:(JCCollectionCarouseView *)carouseView viewForIndex:(NSUInteger )index{
-//    return nil;
-//}
-
 - (void)carouseView:(JCCollectionCarouseView *)carouseView didSelectedAtIndex:(NSUInteger )index{
-//    NSLog(@"didSelectedAtIndex %lu",(unsigned long)index);
+    NSLog(@"didSelectedAtIndex %lu",(unsigned long)index);
 }
 
 - (void)carouseView:(JCCollectionCarouseView *)carouseView willDisplayViewAtIndex:(NSUInteger )index{
-//    NSLog(@"willDisplayViewAtIndex %lu",(unsigned long)index);
+    NSLog(@"willDisplayViewAtIndex %lu",(unsigned long)index);
 }
 
 @end
