@@ -8,9 +8,9 @@
 
 #import "ViewController.h"
 #import "JCCarouselView.h"
-
+#import "JCCollectionCarouseView.h"
 #import "JCSingleCarouselView.h"
-@interface ViewController ()<JCCarouselViewDelegate>
+@interface ViewController ()<JCCarouselViewDelegate, JCCarouseViewProtocol, JCCarouseViewDataSource>
 @property (nonatomic, strong) NSArray *imageUrlArr;
 @end
 
@@ -32,7 +32,9 @@
     [self demo1];
     
     //用一张UIImageView实现的，利用动画转场
-    [self demo2];
+//    [self demo2];
+    
+    [self demo3];
 }
 
 - (void)demo1{
@@ -68,6 +70,32 @@
     bannerView.imageUrlArr = self.imageUrlArr;
 }
 
+- (void)demo3{
+    JCCollectionCarouseView *banner = [[JCCollectionCarouseView alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 220)];
+    banner.dataSource = self;
+    banner.delegate = self;
+    [banner reloadData];
+    [self.view addSubview:banner];
+}
 
+- (NSInteger)numberOfCarouseView:(JCCollectionCarouseView *)carouseView{
+    return self.imageUrlArr.count;
+}
+
+- (NSURL *)carouseView:(JCCollectionCarouseView *)carouseView imageURLForIndex:(NSUInteger )index{
+    return [NSURL URLWithString:self.imageUrlArr[index]];
+}
+
+//- (UIView *)carouseView:(JCCollectionCarouseView *)carouseView viewForIndex:(NSUInteger )index{
+//    return nil;
+//}
+
+- (void)carouseView:(JCCollectionCarouseView *)carouseView didSelectedAtIndex:(NSUInteger )index{
+//    NSLog(@"didSelectedAtIndex %lu",(unsigned long)index);
+}
+
+- (void)carouseView:(JCCollectionCarouseView *)carouseView willDisplayViewAtIndex:(NSUInteger )index{
+//    NSLog(@"willDisplayViewAtIndex %lu",(unsigned long)index);
+}
 
 @end
